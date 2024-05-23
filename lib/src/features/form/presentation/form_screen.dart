@@ -47,10 +47,11 @@ class FormScreen extends StatelessWidget {
     if (input == null || input.isEmpty) {
       return 'E-Mail darf nicht leer sein';
     }
-    const emailPattern = r'^[^@]+@[^@]+\.(com|de)$';
-    final regExp = RegExp(emailPattern);
-    if (!regExp.hasMatch(input)) {
-      return 'Ungültige E-Mail-Adresse';
+    if (!input.contains('@')) {
+      return 'E-Mail muss ein "@" enthalten';
+    }
+    if (!(input.endsWith('.com') || input.endsWith('.de'))) {
+      return 'E-Mail muss mit ".com" oder ".de" enden';
     }
     return null;
   }
