@@ -44,12 +44,24 @@ class FormScreen extends StatelessWidget {
   }
 
   String? validateEmail(String? input) {
-    // TODO: implementiere hier die Logik, die im Task Sheet beschrieben ist
+    if (input == null || input.isEmpty) {
+      return 'E-Mail darf nicht leer sein';
+    }
+    const emailPattern = r'^[^@]+@[^@]+\.(com|de)$';
+    final regExp = RegExp(emailPattern);
+    if (!regExp.hasMatch(input)) {
+      return 'Ungültige E-Mail-Adresse';
+    }
     return null;
   }
 
   String? validatePw(String? input) {
-    // TODO: implementiere hier die Logik, die im Task Sheet beschrieben ist
+    if (input == null || input.isEmpty) {
+      return 'Passwort darf nicht leer sein';
+    }
+    if (input.length < 6 || input.length > 12) {
+      return 'Passwort muss zwischen 6 und 12 Zeichen lang sein';
+    }
     return null;
   }
 }
