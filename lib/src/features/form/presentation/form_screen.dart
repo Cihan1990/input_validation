@@ -5,7 +5,7 @@ class FormScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   // Konstruktor
-   FormScreen({super.key});
+  FormScreen({super.key});
 
   // Methoden
   @override
@@ -16,6 +16,9 @@ class FormScreen extends StatelessWidget {
         child: Form(
           key: _formKey,
           child: Column(children: [
+            const SizedBox(
+              height: 20,
+            ),
             TextFormField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -40,7 +43,8 @@ class FormScreen extends StatelessWidget {
                 if (_formKey.currentState?.validate() ?? false) {
                   // Wenn das Formular gültig ist, zeige eine Erfolgsmeldung oder führe andere Aktionen aus.
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Formular erfolgreich validiert!')),
+                    const SnackBar(
+                        content: Text('Formular erfolgreich validiert!')),
                   );
                 }
               },
