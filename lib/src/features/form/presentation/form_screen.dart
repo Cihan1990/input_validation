@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class FormScreen extends StatelessWidget {
   // Attribute
-  // (keine)
+  final _formKey = GlobalKey<FormState>();
 
   // Konstruktor
-  const FormScreen({super.key});
+   FormScreen({super.key});
 
   // Methoden
   @override
@@ -14,6 +14,7 @@ class FormScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Form(
+          key: _formKey,
           child: Column(children: [
             TextFormField(
               decoration: const InputDecoration(
@@ -30,11 +31,19 @@ class FormScreen extends StatelessWidget {
                 label: Text("Passwort"),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
+              obscureText: true,
               validator: validatePw,
             ),
             const SizedBox(height: 32),
             FilledButton(
-              onPressed: () {},
+              onPressed: () {
+                if (_formKey.currentState?.validate() ?? false) {
+                  // Wenn das Formular gültig ist, zeige eine Erfolgsmeldung oder führe andere Aktionen aus.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Formular erfolgreich validiert!')),
+                  );
+                }
+              },
               child: const Text("Login"),
             ),
           ]),
